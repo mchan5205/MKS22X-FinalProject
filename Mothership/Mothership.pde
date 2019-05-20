@@ -27,6 +27,7 @@ void setup(){
   thingsToDisplay.add(p);
 }  
 void draw(){
+  background(16,19,98);
   if (keyPressed){
     if (key == 'd'){
       p.changex(1);
