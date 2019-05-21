@@ -9,10 +9,10 @@ class Player implements Displayable{
     y = yv;
   } 
   void display(){
-    rect(x, y, 50 ,50);
+    triangle(x, y, x - 25, y + 50, x + 25, y + 50);
   }  
   void changex(float change){
-    if (x + change > 0 && x + change < 950){
+    if (x + change > 25 && x + change < 975){
       x += change;
     }  
   }  
