@@ -22,13 +22,27 @@ class Player implements Displayable{
     }
   }  
 }  
+class MShip implements Displayable{
+  float x;
+  float y;
+  MShip(float xv, float yv){
+    x = xv;
+    y = yv;
+  }
+  void display(){
+    triangle(x, y, x - 200, y - 200, x + 200, y - 200);
+  }  
+}  
 ArrayList<Displayable> thingsToDisplay;
 Player p;
+MShip m;
 void setup(){
   size(1000,800);
   thingsToDisplay = new ArrayList<Displayable>();
   p = new Player(500,500);
   thingsToDisplay.add(p);
+  m = new MShip(500, 200);
+  thingsToDisplay.add(m);
 }  
 void draw(){
   background(16,19,98);
