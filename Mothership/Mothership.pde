@@ -22,6 +22,18 @@ class Player implements Displayable{
     }
   }  
 }  
+class Projectile implements Displayable{
+  float x;
+  float y;
+  float xvel;
+  float yvel;
+  Projectile(xs, ys, xv, yv){
+    x = xs;
+    y = ys;
+    xvel = xv;
+    yvel = yv;
+  }  
+}
 class MShip implements Displayable{
   float x;
   float y;
