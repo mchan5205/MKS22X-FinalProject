@@ -21,19 +21,19 @@ class Player implements Displayable{
       y += change;
     }
   }  
-}  
+}  /*
 class Projectile implements Displayable{
   float x;
   float y;
   float xvel;
   float yvel;
-  Projectile(xs, ys, xv, yv){
+  Projectile(float xs, float ys, float xv, float yv){
     x = xs;
     y = ys;
     xvel = xv;
     yvel = yv;
   }  
-}
+}*/
 class MShip implements Displayable{
   float x;
   float y;
@@ -45,7 +45,39 @@ class MShip implements Displayable{
     triangle(x, y, x - 200, y - 200, x + 200, y - 200);
   }  
 }  
+void keyPressed(){
+  if (key == 'a'){
+    moveLeft = true;
+  }  
+  if (key == 'd'){
+    moveRight = true;
+  }
+  if (key == 'w'){
+    moveUp = true;
+  }
+  if (key == 's'){
+    moveDown = true;
+  }  
+}
+void keyReleased(){
+  if (key == 'a'){
+    moveLeft = false;
+  }
+  if (key == 'd'){
+    moveRight = false;
+  }
+  if (key == 'w'){
+    moveUp = false;
+  }
+  if (key == 's'){
+    moveDown = false;
+  }  
+}  
 ArrayList<Displayable> thingsToDisplay;
+boolean moveLeft;
+boolean moveRight;
+boolean moveUp;
+boolean moveDown;
 Player p;
 MShip m;
 void setup(){
@@ -57,7 +89,7 @@ void setup(){
   thingsToDisplay.add(m);
 }  
 void draw(){
-  background(16,19,98);
+  background(16,19,98);/*
   if (keyPressed){
     if (key == 'd'){
       p.changex(4);
@@ -71,6 +103,18 @@ void draw(){
     if (key == 'w'){
       p.changey(-4);
     }
+  }  */
+  if (moveLeft){
+    p.changex(-2);
+  }
+  if (moveRight){
+    p.changex(2);
+  }  
+  if (moveUp){
+    p.changey(-2);
+  }
+  if (moveDown){
+    p.changey(2);
   }  
   for(int i = 0; i < thingsToDisplay.size(); i++){
     thingsToDisplay.get(i).display();
