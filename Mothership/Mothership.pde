@@ -21,7 +21,7 @@ class Player implements Displayable{
       y += change;
     }
   }  
-}  /*
+}  
 class Projectile implements Displayable{
   float x;
   float y;
@@ -33,16 +33,27 @@ class Projectile implements Displayable{
     xvel = xv;
     yvel = yv;
   }  
-}*/
+  void display(){
+    x += xvel;
+    y += yvel;
+    ellipse(x, y, 3, 3);
+  }  
+}
 class MShip implements Displayable{
   float x;
   float y;
+  int t;
   MShip(float xv, float yv){
     x = xv;
     y = yv;
+    t = 0;
   }
   void display(){
     triangle(x, y, x - 200, y - 200, x + 200, y - 200);
+    t += 1;
+  }
+  int getTime(){
+    return t;
   }  
 }  
 void keyPressed(){
@@ -89,21 +100,7 @@ void setup(){
   thingsToDisplay.add(m);
 }  
 void draw(){
-  background(16,19,98);/*
-  if (keyPressed){
-    if (key == 'd'){
-      p.changex(4);
-    }
-    if (key == 'a'){
-      p.changex(-4);
-    }
-    if (key == 's'){
-      p.changey(4);
-    }
-    if (key == 'w'){
-      p.changey(-4);
-    }
-  }  */
+  background(16,19,98);
   if (moveLeft){
     p.changex(-2);
   }
@@ -118,5 +115,9 @@ void draw(){
   }  
   for(int i = 0; i < thingsToDisplay.size(); i++){
     thingsToDisplay.get(i).display();
+  }  
+  if (m.getTime() % 60 == 0){
+    Projectile h = new Projectile(500, 200, 10, 10);    
+    thingsToDisplay.add(h);
   }  
 }  
