@@ -20,6 +20,12 @@ class Player implements Displayable{
     if (y + change > 0 && y + change < 750){
       y += change;
     }
+  } 
+  float getX(){
+    return x;
+  }
+  float getY(){
+    return y;
   }  
 }  
 class Projectile implements Displayable{
@@ -36,7 +42,7 @@ class Projectile implements Displayable{
   void display(){
     x += xvel;
     y += yvel;
-    ellipse(x, y, 3, 3);
+    ellipse(x, y, 5, 5);
   }  
 }
 class MShip implements Displayable{
@@ -117,7 +123,7 @@ void draw(){
     thingsToDisplay.get(i).display();
   }  
   if (m.getTime() % 60 == 0){
-    Projectile h = new Projectile(500, 200, 10, 10);    
+    Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY()) / 100);    
     thingsToDisplay.add(h);
   }  
 }  
