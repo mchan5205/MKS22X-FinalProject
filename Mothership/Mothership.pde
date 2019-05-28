@@ -47,12 +47,12 @@ class Projectile implements Displayable{
   boolean collision(Player p){
     float shipa = 1250;
     float a1 = triArea(x, y, p.x, p.y, p.x - 25, p.y + 50);
-    float a2 = triArea(x, y, p.x + 25, p.y + 50, p.x - 25, p.y + 50);
+    float a2 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
     float a3 = triArea(x, y, p.x, p.y, p.x + 25, p.y - 50);
-    return shipa == a1 + a2 + a3;
+    return shipa >= a1 + a2 + a3;
   }  
   float triArea(float x1, float y1, float x2, float y2, float x3, float y3){
-  return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+    return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
   }
 }
 class MShip implements Displayable{
@@ -107,6 +107,7 @@ boolean moveLeft;
 boolean moveRight;
 boolean moveUp;
 boolean moveDown;
+boolean lose;
 Player p;
 MShip m;
 void setup(){
@@ -117,6 +118,7 @@ void setup(){
   thingsToDisplay.add(p);
   m = new MShip(500, 200);
   thingsToDisplay.add(m);
+  lose = false;
 }  
 void draw(){
   background(16,19,98);
@@ -137,6 +139,7 @@ void draw(){
     if (i >= 2){
       if (proj.get(i - 2).collision(p)){
         thingsToDisplay.remove(0);
+        lose = true;
       }  
     }  
   }  
@@ -144,5 +147,8 @@ void draw(){
     Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY()) / 100);    
     thingsToDisplay.add(h);
     proj.add(h);
+  }  
+  if (lose){
+    text("You Lose", 300, 500);
   }  
 }  
