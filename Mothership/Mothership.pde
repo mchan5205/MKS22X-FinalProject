@@ -44,6 +44,16 @@ class Projectile implements Displayable{
     y += yvel;
     ellipse(x, y, 5, 5);
   }  
+  boolean collision(Player p){
+    float shipa = 1250;
+    float a1 = triArea(x, y, p.x, p.y, p.x - 25, p.y + 50);
+    float a2 = triArea(x, y, p.x + 25, p.y + 50, p.x - 25, p.y + 50);
+    float a3 = triArea(x, y, p.x, p.y, p.x + 25, p.y - 50);
+    return shipa == a1 + a2 + a3;
+  }  
+  float triArea(float x1, float y1, float x2, float y2, float x3, float y3){
+  return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+  }
 }
 class MShip implements Displayable{
   float x;
@@ -90,7 +100,9 @@ void keyReleased(){
     moveDown = false;
   }  
 }  
+  
 ArrayList<Displayable> thingsToDisplay;
+ArrayList<Projectile> proj;
 boolean moveLeft;
 boolean moveRight;
 boolean moveUp;
@@ -100,6 +112,7 @@ MShip m;
 void setup(){
   size(1000,800);
   thingsToDisplay = new ArrayList<Displayable>();
+  proj = new ArrayList<Projectile>();
   p = new Player(500,500);
   thingsToDisplay.add(p);
   m = new MShip(500, 200);
@@ -121,9 +134,15 @@ void draw(){
   }  
   for(int i = 0; i < thingsToDisplay.size(); i++){
     thingsToDisplay.get(i).display();
+    if (i >= 2){
+      if (proj.get(i - 2).collision(p)){
+        thingsToDisplay.remove(0);
+      }  
+    }  
   }  
   if (m.getTime() % 60 == 0){
     Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY()) / 100);    
     thingsToDisplay.add(h);
+    proj.add(h);
   }  
 }  
