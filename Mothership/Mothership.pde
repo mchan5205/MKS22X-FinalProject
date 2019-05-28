@@ -46,10 +46,12 @@ class Projectile implements Displayable{
   }  
   boolean collision(Player p){
     float shipa = 1250;
-    float a1 = triArea(x, y, p.x, p.y, p.x - 25, p.y + 50);
-    float a2 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
-    float a3 = triArea(x, y, p.x, p.y, p.x + 25, p.y - 50);
-    return shipa >= a1 + a2 + a3;
+    float a1 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
+    float a2 = triArea(p.x, p.y, x, y, p.x + 25, p.y + 50);
+    float a3 = triArea(p.x, p.y, p.x - 25, p.y + 50, x, y);
+    //float a2 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
+    //float a3 = triArea(x, y, p.x, p.y, p.x + 25, p.y - 50);
+    return shipa == a1 + a2 + a3;
   }  
   float triArea(float x1, float y1, float x2, float y2, float x3, float y3){
     return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
