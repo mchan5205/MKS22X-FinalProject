@@ -4,12 +4,14 @@ interface Displayable{
 class Player implements Displayable{
   float x;
   float y;
+  int atktime;
   Player(float xv, float yv){
     x = xv;
     y = yv;
   } 
   void display(){
     triangle(x, y, x - 25, y + 50, x + 25, y + 50);
+    atktime -= 1;
   }  
   void changex(float change){
     if (x + change > 25 && x + change < 975){
@@ -26,6 +28,9 @@ class Player implements Displayable{
   }
   float getY(){
     return y;
+  }  
+  Projectile attack(){
+     return new Projectile(x, y, 0, -3);
   }  
 }  
 class Projectile implements Displayable{
@@ -49,8 +54,6 @@ class Projectile implements Displayable{
     float a1 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
     float a2 = triArea(p.x, p.y, x, y, p.x + 25, p.y + 50);
     float a3 = triArea(p.x, p.y, p.x - 25, p.y + 50, x, y);
-    //float a2 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
-    //float a3 = triArea(x, y, p.x, p.y, p.x + 25, p.y - 50);
     return shipa == a1 + a2 + a3;
   }  
   float triArea(float x1, float y1, float x2, float y2, float x3, float y3){
@@ -102,6 +105,10 @@ void keyReleased(){
     moveDown = false;
   }  
 }  
+void mouseClicked(){
+  proj.add(p.attack());
+  thingsToDisplay.add(proj.get(proj.size() - 1));
+}  
   
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Projectile> proj;
@@ -138,7 +145,7 @@ void draw(){
   }  
   for(int i = 0; i < thingsToDisplay.size(); i++){
     thingsToDisplay.get(i).display();
-    if (i >= 2){
+    if (i >= 2 && ! lose){
       if (proj.get(i - 2).collision(p)){
         thingsToDisplay.remove(0);
         lose = true;
@@ -146,7 +153,7 @@ void draw(){
     }  
   }  
   if (m.getTime() % 60 == 0){
-    Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY()) / 100);    
+    Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100);    
     thingsToDisplay.add(h);
     proj.add(h);
   }  
