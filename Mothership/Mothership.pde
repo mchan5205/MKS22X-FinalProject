@@ -30,7 +30,7 @@ class Player implements Displayable{
     return y;
   }  
   Projectile attack(){
-     return new Projectile(x, y, 0, -3);
+     return new Projectile(x, y, 0, -3, true);
   }  
 }  
 class Projectile implements Displayable{
@@ -38,23 +38,38 @@ class Projectile implements Displayable{
   float y;
   float xvel;
   float yvel;
-  Projectile(float xs, float ys, float xv, float yv){
+  boolean friendly;
+  Projectile(float xs, float ys, float xv, float yv, boolean f){
     x = xs;
     y = ys;
     xvel = xv;
     yvel = yv;
+    friendly = f;
   }  
   void display(){
     x += xvel;
     y += yvel;
     ellipse(x, y, 5, 5);
   }  
-  boolean collision(Player p){
-    float shipa = 1250;
-    float a1 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
-    float a2 = triArea(p.x, p.y, x, y, p.x + 25, p.y + 50);
-    float a3 = triArea(p.x, p.y, p.x - 25, p.y + 50, x, y);
-    return shipa == a1 + a2 + a3;
+  boolean checkf(){
+    return friendly;
+  }  
+  boolean collision(Player p, MShip m){
+    if (! friendly){
+      float shipa = 1250;
+      float a1 = triArea(x, y, p.x - 25, p.y + 50, p.x + 25, p.y + 50);
+      float a2 = triArea(p.x, p.y, x, y, p.x + 25, p.y + 50);
+      float a3 = triArea(p.x, p.y, p.x - 25, p.y + 50, x, y);
+      return shipa == a1 + a2 + a3;
+    }
+    if (friendly){
+      float shipa = 40000;
+      float a1 = triArea(x, y, m.x - 200, m.y - 200, m.x + 200, m.y - 200);
+      float a2 = triArea(m.x, m.y, x, y, m.x + 200, m.y - 200);
+      float a3 = triArea(m.x, m.y, m.x - 200, m.y - 200, x, y);
+      return shipa == a1 + a2 + a3;
+    }  
+    return false;
   }  
   float triArea(float x1, float y1, float x2, float y2, float x3, float y3){
     return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
@@ -64,10 +79,12 @@ class MShip implements Displayable{
   float x;
   float y;
   int t;
+  int health;
   MShip(float xv, float yv){
     x = xv;
     y = yv;
     t = 0;
+    health = 10;
   }
   void display(){
     triangle(x, y, x - 200, y - 200, x + 200, y - 200);
@@ -75,6 +92,12 @@ class MShip implements Displayable{
   }
   int getTime(){
     return t;
+  }  
+  void loseHealth(){
+    health -= 1;
+  }  
+  int health(){
+    return health;
   }  
 }  
 void keyPressed(){
@@ -146,14 +169,22 @@ void draw(){
   for(int i = 0; i < thingsToDisplay.size(); i++){
     thingsToDisplay.get(i).display();
     if (i >= 2 && ! lose){
-      if (proj.get(i - 2).collision(p)){
-        thingsToDisplay.remove(0);
-        lose = true;
+      if (proj.get(i - 2).collision(p, m)){
+        if (! proj.get(i - 2).checkf()){
+          thingsToDisplay.remove(0);
+          lose = true;
+        }
+        else{
+          m.loseHealth();
+          if (m.health() <= 0){
+            text("asbsfsf", 100, 100);
+          }
+        }  
       }  
     }  
   }  
   if (m.getTime() % 60 == 0){
-    Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100);    
+    Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100, false);    
     thingsToDisplay.add(h);
     proj.add(h);
   }  
