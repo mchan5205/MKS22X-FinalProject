@@ -62,8 +62,12 @@ class Player implements Displayable{
       rolltimer = 30;
     }
   }  
+  int atktimer(){
+    return atktime;
+  }  
   Projectile attack(){
-     return new Projectile(x, y, 0, -3, true);
+    atktime = 20;
+    return new Projectile(x, y, 0, -3, true);
   }  
 }  
 class Projectile implements Displayable{
@@ -170,8 +174,10 @@ void keyReleased(){
   }  
 }  
 void mouseClicked(){
-  proj.add(p.attack());
-  thingsToDisplay.add(proj.get(proj.size() - 1));
+  if (p.atktimer() <= 0){
+    proj.add(p.attack());
+    thingsToDisplay.add(proj.get(proj.size() - 1));
+  } 
 }  
   
 ArrayList<Displayable> thingsToDisplay;
