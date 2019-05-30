@@ -44,14 +44,16 @@ class Player implements Displayable{
     return y;
   }  
   void roll(boolean left, boolean right, boolean up, boolean down){
+    rollxvel = 0;
+    rollyvel = 0;
     if (left){
-      rollxvel = -3;
+      rollxvel += -3;
     }  
     if (right){
       rollxvel += 3;
     }
     if (up){
-      rollyvel = -3;
+      rollyvel += -3;
     }
     if (down){
       rollyvel += 3;
