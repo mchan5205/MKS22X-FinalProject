@@ -6,6 +6,8 @@ class Player implements Displayable{
   float y;
   int atktime;
   int rolltimer;
+  int rollxvel;
+  int rollyvel;
   Player(float xv, float yv){
     x = xv;
     y = yv;
@@ -14,10 +16,15 @@ class Player implements Displayable{
   void display(){
     if (rolltimer > 0){
      fill(0, 255, 0);
+     changex(rollxvel);
+     changey(rollyvel);
     } 
     triangle(x, y, x - 25, y + 50, x + 25, y + 50);
     fill(255,255,255);
     atktime -= 1; 
+  }  
+  int rolltimer(){
+    return rolltimer;
   }  
   void changex(float change){
     if (x + change > 25 && x + change < 975){
@@ -36,7 +43,21 @@ class Player implements Displayable{
     return y;
   }  
   void roll(boolean left, boolean right, boolean up, boolean down){
-    rolltimer = 10;
+    if (left){
+      rollxvel = -3;
+    }  
+    if (right){
+      rollxvel += 3;
+    }
+    if (up){
+      rollyvel = -3;
+    }
+    if (down){
+      rollyvel += 3;
+    }  
+    if (rollxvel != 0 || rollyvel != 0){
+      rolltimer = 10;
+    }
   }  
   Projectile attack(){
      return new Projectile(x, y, 0, -3, true);
@@ -171,16 +192,16 @@ void setup(){
 }  
 void draw(){
   background(16,19,98);
-  if (moveLeft){
+  if (moveLeft && p.rolltimer() <= 0){
     p.changex(-2);
   }
-  if (moveRight){
+  if (moveRight && p.rolltimer() <= 0){
     p.changex(2);
   }  
-  if (moveUp){
+  if (moveUp && p.rolltimer() <= 0){
     p.changey(-2);
   }
-  if (moveDown){
+  if (moveDown && p.rolltimer() <= 0){
     p.changey(2);
   }  
   for(int i = 0; i < thingsToDisplay.size(); i++){
