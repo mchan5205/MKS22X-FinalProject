@@ -22,6 +22,7 @@ class Player implements Displayable{
     triangle(x, y, x - 25, y + 50, x + 25, y + 50);
     fill(255,255,255);
     atktime -= 1; 
+    rolltimer -= 1;
   }  
   int rolltimer(){
     return rolltimer;
@@ -56,7 +57,7 @@ class Player implements Displayable{
       rollyvel += 3;
     }  
     if (rollxvel != 0 || rollyvel != 0){
-      rolltimer = 10;
+      rolltimer = 30;
     }
   }  
   Projectile attack(){
@@ -209,8 +210,10 @@ void draw(){
     if (i >= 2 && ! lose){
       if (proj.get(i - 2).collision(p, m)){
         if (! proj.get(i - 2).checkf()){
-          thingsToDisplay.remove(0);
-          lose = true;
+          if (p.rolltimer() <= 0){
+            thingsToDisplay.remove(0);
+            lose = true;
+          } 
         }
         else{
           m.loseHealth();
