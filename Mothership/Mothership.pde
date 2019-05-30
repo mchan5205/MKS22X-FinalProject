@@ -5,13 +5,19 @@ class Player implements Displayable{
   float x;
   float y;
   int atktime;
+  int rolltimer;
   Player(float xv, float yv){
     x = xv;
     y = yv;
+    rolltimer = 0;
   } 
   void display(){
+    if (rolltimer > 0){
+     fill(0, 255, 0);
+    } 
     triangle(x, y, x - 25, y + 50, x + 25, y + 50);
-    atktime -= 1;
+    fill(255,255,255);
+    atktime -= 1; 
   }  
   void changex(float change){
     if (x + change > 25 && x + change < 975){
@@ -28,6 +34,9 @@ class Player implements Displayable{
   }
   float getY(){
     return y;
+  }  
+  void roll(boolean left, boolean right, boolean up, boolean down){
+    rolltimer = 10;
   }  
   Projectile attack(){
      return new Projectile(x, y, 0, -3, true);
@@ -186,7 +195,6 @@ void draw(){
           m.loseHealth();
           thingsToDisplay.remove(i);
           proj.remove(i - 2);
-          i --;
           if (m.health() <= 0){
             text("asbsfsf", 100, 100);
           }
@@ -195,9 +203,13 @@ void draw(){
       if (proj.get(i - 2).bounds()){
         proj.remove(i - 2);
         thingsToDisplay.remove(i);
-        i--;
       }  
     }  
+  }  
+  if (keyPressed){
+    if (key == ' '){
+      p.roll(moveLeft, moveRight, moveUp, moveDown);
+    } 
   }  
   if (m.getTime() % 60 == 0){
     Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100, false);    
