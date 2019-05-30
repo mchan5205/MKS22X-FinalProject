@@ -39,16 +39,24 @@ class Projectile implements Displayable{
   float xvel;
   float yvel;
   boolean friendly;
+  boolean oob;
   Projectile(float xs, float ys, float xv, float yv, boolean f){
     x = xs;
     y = ys;
     xvel = xv;
     yvel = yv;
     friendly = f;
+    oob = false;
+  }  
+  boolean bounds(){
+    return oob;
   }  
   void display(){
     x += xvel;
     y += yvel;
+    if (x > 1000 || x < 0 || y > 800 || y < 0){
+      oob = true;
+    }  
     ellipse(x, y, 5, 5);
   }  
   boolean checkf(){
@@ -176,10 +184,18 @@ void draw(){
         }
         else{
           m.loseHealth();
+          thingsToDisplay.remove(i);
+          proj.remove(i - 2);
+          i --;
           if (m.health() <= 0){
             text("asbsfsf", 100, 100);
           }
         }  
+      } 
+      if (proj.get(i - 2).bounds()){
+        proj.remove(i - 2);
+        thingsToDisplay.remove(i);
+        i--;
       }  
     }  
   }  
