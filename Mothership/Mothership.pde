@@ -174,7 +174,7 @@ void keyReleased(){
   }  
 }  
 void mouseClicked(){
-  if (p.atktimer() <= 0){
+  if (p.atktimer() <= 0 && p.rolltimer() <= 0){
     proj.add(p.attack());
     thingsToDisplay.add(proj.get(proj.size() - 1));
   } 
@@ -227,6 +227,9 @@ void draw(){
           m.loseHealth();
           thingsToDisplay.remove(i);
           proj.remove(i - 2);
+          if (i != 2){
+            i--;
+          }  
           if (m.health() <= 0){
             text("asbsfsf", 100, 100);
           }
@@ -235,6 +238,9 @@ void draw(){
       if (proj.get(i - 2).bounds()){
         proj.remove(i - 2);
         thingsToDisplay.remove(i);
+        if (i != 2){
+          i--;
+        }  
       }  
     }  
   }  
