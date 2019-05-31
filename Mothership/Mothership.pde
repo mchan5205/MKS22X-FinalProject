@@ -146,6 +146,9 @@ class MShip implements Displayable{
   int health(){
     return health;
   }  
+  Projectile attack(){
+    return new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100, false);
+  }  
 }  
 void keyPressed(){
   if (key == 'a'){
@@ -232,9 +235,6 @@ void draw(){
           if (i != 2){
             i--;
           }  
-          if (m.health() <= 0){
-            text("asbsfsf", 100, 100);
-          }
         }  
       } 
       if (proj.get(i - 2).bounds()){
@@ -252,11 +252,16 @@ void draw(){
     } 
   }  
   if (m.getTime() % 60 == 0){
-    Projectile h = new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100, false);    
+    Projectile h = m.attack();
     thingsToDisplay.add(h);
     proj.add(h);
   }  
+  if (m.health() <= 0){
+    text("asbsfsf", 100, 100);
+    noLoop();
+  }
   if (lose){
     text("You Lose", 300, 500);
+    noLoop();
   }  
 }  
