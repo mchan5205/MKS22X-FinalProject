@@ -33,7 +33,7 @@ class Player implements Displayable{
     }  
   }  
   void changey(float change){
-    if (y + change > 0 && y + change < 750){
+    if (y + change > 200 && y + change < 750){
       y += change;
     }
   } 
@@ -129,10 +129,12 @@ class MShip implements Displayable{
     x = xv;
     y = yv;
     t = 0;
-    health = 10;
+    health = 25;
   }
   void display(){
+    fill(255, health * 10, health * 10);
     triangle(x, y, x - 200, y - 200, x + 200, y - 200);
+    fill(255,255,255);
     t += 1;
   }
   int getTime(){
