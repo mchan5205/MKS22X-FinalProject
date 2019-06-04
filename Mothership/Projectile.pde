@@ -49,7 +49,19 @@ class Projectile implements Displayable{
   }
 }
 class CurvedP extends Projectile{
+  double t = 0;
+  float start;
   CurvedP(float xs, float ys, float xv, float yv){
-  
+    super(xs, ys, xv, yv, false);
+    start = xs;
+  }  
+  void display(){
+    x = xvel * (float)Math.sin(t) + start;
+    y += yvel;
+    ellipse(x, y, 5, 5);
+    if (y > 800){
+      oob = true;
+    }  
+    t += 0.1;
   }  
 }  

@@ -25,6 +25,14 @@ class MShip implements Displayable{
     return health;
   }  
   Projectile attack(){
-    return new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100, false);
+    Random r = new Random();
+    int n = r.nextInt(2);
+    if (n == 1){
+      Projectile p = new CurvedP(500, 200, 100, 1);
+      return p;
+    }  
+    else{
+      return new Projectile(500, 200, -1 * ((500 - p.getX())) / 100, Math.abs(200 - p.getY() - 25) / 100, false);
+    }  
   }  
 }  
