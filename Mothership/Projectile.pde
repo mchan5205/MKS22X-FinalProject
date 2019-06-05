@@ -81,4 +81,7 @@ class Laser extends Projectile{
     }
     fill(255,255,255);
   }  
+  boolean collision(Player p){
+   
+  }  
 }  
