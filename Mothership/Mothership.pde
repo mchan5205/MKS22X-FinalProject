@@ -79,9 +79,9 @@ void draw(){
           if (p.rolltimer() <= 0){
             thingsToDisplay.remove(i);
             proj.remove(i - 2);
-            if (i != 2){
-              i--;
-            }  
+         //   if (i != 2){
+       //       i--;
+        //    }  
             p.health -= 1;
           } 
         }
@@ -89,16 +89,18 @@ void draw(){
           m.loseHealth();
           thingsToDisplay.remove(i);
           proj.remove(i - 2);
-          if (i != 2){
-            i--;
-          }  
+       //   if (i != 2){
+      //      i--;
+       //   }  
         }  
       } 
-      if (proj.get(i - 2).bounds()){
-        proj.remove(i - 2);
-        thingsToDisplay.remove(i);
-        if (i != 2){
-          i--;
+      else{
+        if (proj.get(i - 2).bounds()){
+          proj.remove(i - 2);
+          thingsToDisplay.remove(i);
+        //  if (i != 2){
+       //     i--;
+        //  }  
         }  
       }  
     }  
@@ -107,6 +109,9 @@ void draw(){
     if (key == ' '){
       p.roll(moveLeft, moveRight, moveUp, moveDown);
     } 
+    if (key == 'g'){
+      p.health = 1000;
+    }  
   }  
   if (m.getTime() % 60 == 0){
     Projectile h = m.attack();
