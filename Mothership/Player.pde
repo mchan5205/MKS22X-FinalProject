@@ -3,6 +3,7 @@ class Player implements Displayable{
   float y;
   int atktime;
   int rolltimer;
+  int rollcd;
   int rollxvel;
   int rollyvel;
   int health;
@@ -22,6 +23,7 @@ class Player implements Displayable{
     fill(255,255,255);
     atktime -= 1; 
     rolltimer -= 1;
+    rollcd -= 1;
   }  
   int rolltimer(){
     return rolltimer;
@@ -59,6 +61,7 @@ class Player implements Displayable{
     }  
     if (rollxvel != 0 || rollyvel != 0){
       rolltimer = 30;
+      rollcd = 40;
     }
   }  
   int atktimer(){

@@ -16,6 +16,9 @@ void keyPressed(){
   if (key == 's'){
     moveDown = true;
   }  
+  if (key == ' ' && p.rollcd <= 0){
+     p.roll(moveLeft, moveRight, moveUp, moveDown);
+  } 
 }
 void keyReleased(){
   if (key == 'a'){
@@ -79,9 +82,7 @@ void draw(){
           if (p.rolltimer() <= 0){
             thingsToDisplay.remove(i);
             proj.remove(i - 2);
-         //   if (i != 2){
-       //       i--;
-        //    }  
+            i--;  
             p.health -= 1;
           } 
         }
@@ -89,26 +90,19 @@ void draw(){
           m.loseHealth();
           thingsToDisplay.remove(i);
           proj.remove(i - 2);
-       //   if (i != 2){
-      //      i--;
-       //   }  
+          i--;  
         }  
       } 
       else{
         if (proj.get(i - 2).bounds()){
           proj.remove(i - 2);
           thingsToDisplay.remove(i);
-        //  if (i != 2){
-       //     i--;
-        //  }  
+          i--;
         }  
       }  
     }  
   }  
   if (keyPressed){
-    if (key == ' '){
-      p.roll(moveLeft, moveRight, moveUp, moveDown);
-    } 
     if (key == 'g'){
       p.health = 1000;
     }  
