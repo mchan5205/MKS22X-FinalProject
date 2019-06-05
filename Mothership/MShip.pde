@@ -26,9 +26,13 @@ class MShip implements Displayable{
   }  
   Projectile attack(){
     Random r = new Random();
-    int n = r.nextInt(2);
+    int n = r.nextInt(3);
     if (n == 1){
       Projectile p = new CurvedP(500, 200, 100, 1);
+      return p;
+    }  
+    if (n == 2){
+      Projectile p = new Laser(500, 200, 0, 1);
       return p;
     }  
     else{

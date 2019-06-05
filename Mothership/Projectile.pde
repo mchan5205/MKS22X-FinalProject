@@ -65,3 +65,20 @@ class CurvedP extends Projectile{
     t += 0.1;
   }  
 }  
+class Laser extends Projectile{
+  Laser(float xs, float ys, float xv, float yv){
+    super(xs, ys, xv, yv, false);
+  }  
+  void display(){
+    x += xvel;
+    y += yvel;
+    fill(255, 0, 0);
+    if (yvel == 0){
+      line(x, 0, x, 800);
+    }
+    if (xvel == 0){
+      line(0, y, 1000, y);
+    }
+    fill(255,255,255);
+  }  
+}  
