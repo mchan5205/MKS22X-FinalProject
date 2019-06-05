@@ -1,5 +1,8 @@
+Description:
+This game is a bullet hell game in which the player must defeat the mothership while staying alive. Use WASD keys to move around and dodge projectiles. Use spacebar to perform a roll, causing you to be locked in a certain direction but immune to projectiles during it. Use left click to shoot projectiles at the enemy to win. You have 3 lives. The mothership has 3 attacks: one that moves towards you and moves faster the further away you are, one that moves like a trig function and a laser.
 
-
+How to run:
+open file on processing and click run button
 
 dev log
 6/4/19
@@ -15,7 +18,8 @@ dev log
   mship turns red as it loses health
 5/30/19
   added delay to player attacks
-  added rolling (locked movement)
+  added rolling (locked movement) with spacebar
+  fixed bug where rolling coukd move too far
   added rolling immuunity to projectiles
 5/29/19
   added player shooting
@@ -30,7 +34,7 @@ dev log
 5/21/19
   created projectile class
   created mship class
-  made player a triangle
+  made player a triangle instead of rectangle
 5/20/19
   created basic map
   added movement from key presses
