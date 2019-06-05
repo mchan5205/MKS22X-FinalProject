@@ -81,7 +81,17 @@ class Laser extends Projectile{
     }
     fill(255,255,255);
   }  
-  boolean collision(Player p){
-   
+  boolean collision(Player p, MShip m){
+    if (yvel == 0){
+      if (x > p.x - 25 && x < p.x + 25){
+        return true;
+      }  
+    }  
+    if (xvel == 0){
+      if (y > p.y && y < p.y + 50){
+        return true;
+      }
+    }
+    return false;
   }  
 }  

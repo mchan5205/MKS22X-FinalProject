@@ -34,19 +34,19 @@ class MShip implements Displayable{
     if (n == 2){
       int l = r.nextInt(4);
       if (l == 0){
-        Projectile p = new Laser(500, 200, 0, 1);
+        Projectile p = new Laser(500, 200, 0, 0.4);
         return p;
       }  
       if (l == 1){
-        Projectile p = new Laser(500, 800, 0, -1);
+        Projectile p = new Laser(500, 800, 0, -0.4);
         return p;
       }  
       if (l == 2){
-        Projectile p = new Laser(0, 200, 1, 0);
+        Projectile p = new Laser(0, 200, 0.4, 0);
         return p;
       }  
       else{
-        Projectile p = new Laser(1000, 200, -1, 0);
+        Projectile p = new Laser(1000, 200, -0.4, 0);
         return p;
       }  
     }  
