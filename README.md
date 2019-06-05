@@ -8,8 +8,9 @@ dev log
 6/4/19
   added player health
   added curved bullets(move like trig function)
-  added lasers
+  added lasers moving horizontally or vertically in a line
   mship randomly generates attacks
+  rolling has a delay in between rolls
   tabified code(readability)
   fixed roll bug  
 5/31/19
