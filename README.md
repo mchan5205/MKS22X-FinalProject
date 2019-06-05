@@ -14,7 +14,7 @@ dev log
   tabified code(readability)
   fixed roll bug  
 5/31/19
-  cannot attack during rolls
+  can no longer attack during rolls
   fixed game ending by using noloop
   mship turns red as it loses health
 5/30/19
@@ -23,18 +23,19 @@ dev log
   fixed bug where rolling coukd move too far
   added rolling immuunity to projectiles
 5/29/19
-  added player shooting
+  added player shooting with left click
   added collision with projectiles and mship also using triangle area
 5/28/19
   added collision with player and projectiles using triangle area
 5/22/19
   allowed for projectiles to move
-  made mship attacks
-  made projectiles target the player
+  made mship attacks at time intervals of 1 sec
+  made projectiles that target the player
   fixed bug with movement(used to not be smooth) by using booleans
 5/21/19
   created projectile class
   created mship class
+  added triangle for mship class depiction
   made player a triangle instead of rectangle
 5/20/19
   created basic map
