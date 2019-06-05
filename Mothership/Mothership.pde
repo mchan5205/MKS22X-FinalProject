@@ -77,8 +77,12 @@ void draw(){
       if (proj.get(i - 2).collision(p, m)){
         if (! proj.get(i - 2).checkf()){
           if (p.rolltimer() <= 0){
-            thingsToDisplay.remove(0);
-            lose = true;
+            thingsToDisplay.remove(i);
+            proj.remove(i - 2);
+            if (i != 2){
+              i--;
+            }  
+            p.health -= 1;
           } 
         }
         else{
@@ -113,7 +117,7 @@ void draw(){
     text("You Win", 500, 400);
     noLoop();
   }
-  if (lose){
+  if (p.health <= 0){
     text("You Lose", 500, 400);
     noLoop();
   }  

@@ -5,10 +5,12 @@ class Player implements Displayable{
   int rolltimer;
   int rollxvel;
   int rollyvel;
+  int health;
   Player(float xv, float yv){
     x = xv;
     y = yv;
     rolltimer = 0;
+    health = 3;
   } 
   void display(){
     if (rolltimer > 0){

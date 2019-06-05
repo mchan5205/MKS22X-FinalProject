@@ -7,10 +7,10 @@ class MShip implements Displayable{
     x = xv;
     y = yv;
     t = 0;
-    health = 25;
+    health = 50;
   }
   void display(){
-    fill(255, health * 10, health * 10);
+    fill(255, health * 5, health * 5);
     triangle(x, y, x - 200, y - 200, x + 200, y - 200);
     fill(255,255,255);
     t += 1;
