@@ -1,6 +1,6 @@
 Description:
 This game is a bullet hell game in which the player must defeat the mothership while staying alive. Use WASD keys to move around and dodge projectiles. Use spacebar to perform a roll, causing you to be locked in a certain direction but immune to projectiles during it. Use left click to shoot projectiles at the enemy to win. You have 3 lives. The mothership has 3 attacks: one that moves towards you and moves faster the further away you are, one that moves like a trig function and a laser.
-
+One algorithm used an algorithm to find whether a point is or is not inside a triangle. This is done by findind the area of the triangle and comparing to the sum of the areas formed by creating triangles using the point and 2 points of the triangle. 
 How to run:
 open file on processing and click run button
 
