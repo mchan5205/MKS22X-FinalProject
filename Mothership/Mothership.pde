@@ -79,7 +79,7 @@ void draw(){
     if (i >= 2 && ! lose){
       if (proj.get(i - 2).collision(p, m)){
         if (! proj.get(i - 2).checkf()){
-          if (p.rolltimer() <= 0){
+          if (p.rolltimer() < 0){
             thingsToDisplay.remove(i);
             proj.remove(i - 2);
             i--;  
