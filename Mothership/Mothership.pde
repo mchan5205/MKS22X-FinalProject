@@ -110,11 +110,11 @@ void draw(){
     proj.add(h);
   }  
   if (m.health() <= 0){
-    text("asbsfsf", 100, 100);
+    text("You Win", 500, 400);
     noLoop();
   }
   if (lose){
-    text("You Lose", 300, 500);
+    text("You Lose", 500, 400);
     noLoop();
   }  
 }  
